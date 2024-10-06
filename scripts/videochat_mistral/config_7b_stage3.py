@@ -34,9 +34,9 @@ inputs = dict(
 # ========================= model ==========================
 model = dict(
     model_cls="VideoChat2_it_mistral",
-    vit_blip_model_path="/root/autodl-tmp/video_chat2/UMT/umt_l16_qformer.pth",
-    mistral_model_path="/root/autodl-tmp/Mistral-7B-Instruct-0.2",
-    videochat2_model_path="/root/autodl-tmp/video_chat2/ckpt/stage3/videochat2_mistral_7b_stage3.pth",
+    vit_blip_model_path="./UMT/umt_l16_qformer.pth",
+    mistral_model_path="./Mistral",
+    videochat2_model_path="./ckpt/stage2/videochat2_mistral_7b_stage2.pth",
     freeze_vit=False,
     freeze_qformer=False,
     max_txt_len="${max_txt_l}", # use large max_txt_len on stage3

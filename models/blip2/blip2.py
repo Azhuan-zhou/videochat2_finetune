@@ -24,7 +24,7 @@ class Blip2Base(nn.Module):
 
     @classmethod
     def init_tokenizer(cls, truncation_side="right"):
-        tokenizer = BertTokenizer.from_pretrained("/root/autodl-tmp/bert", truncation_side=truncation_side, local_files_only=True)
+        tokenizer = BertTokenizer.from_pretrained("./bert", truncation_side=truncation_side, local_files_only=True)
         tokenizer.add_special_tokens({"bos_token": "[DEC]"})
         return tokenizer
     
@@ -50,7 +50,7 @@ class Blip2Base(nn.Module):
         qformer_attention_probs_dropout_prob=0.1,
         qformer_drop_path_rate=0.,
     ):
-        encoder_config = BertConfig.from_pretrained("/root/autodl-tmp/bert", local_files_only=True)
+        encoder_config = BertConfig.from_pretrained("./bert", local_files_only=True)
         encoder_config.encoder_width = vision_width
         # insert cross-attention layer every other block
         encoder_config.add_cross_attention = True
