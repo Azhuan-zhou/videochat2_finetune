@@ -1,0 +1,168 @@
+{
+  "anno_root_it": ".",
+  "available_corpus": {
+    "caption_HumanML3D": [
+      "./HumanML3D/train.json",
+      "./HumanML3D",
+      "video"
+    ],
+    "videochat2_instruction": [
+      [
+        "./HumanML3D/train.json",
+        "./HumanML3D",
+        "video"
+      ]
+    ],
+    "videochat2_instruction_new": [
+      [
+        "./HumanML3D/train.json",
+        "./HumanML3D",
+        "video"
+      ]
+    ],
+    "videochat2_instruction_hd": [
+      [
+        "./HumanML3D/train.json",
+        "./HumanML3D",
+        "video"
+      ]
+    ]
+  },
+  "train_corpus": "videochat2_instruction_new",
+  "train_file": [
+    [
+      "./HumanML3D/train.json",
+      "./HumanML3D",
+      "video"
+    ]
+  ],
+  "test_file": {},
+  "test_types": [],
+  "num_workers": 6,
+  "stop_key": null,
+  "num_frames": 20,
+  "num_frames_test": 20,
+  "batch_size": 1,
+  "max_txt_l": 512,
+  "pre_text": false,
+  "inputs": {
+    "image_res": 224,
+    "video_input": {
+      "num_frames": 20,
+      "sample_type": "rand",
+      "num_frames_test": 20,
+      "sample_type_test": "middle",
+      "random_aug": false
+    },
+    "max_txt_l": {
+      "image": 512,
+      "video": 512
+    },
+    "batch_size": {
+      "image": 1,
+      "video": 1
+    },
+    "batch_size_test": {
+      "image": 1,
+      "video": 1
+    }
+  },
+  "model": {
+    "model_cls": "VideoChat2_it_mistral",
+    "vit_blip_model_path": "/root/autodl-tmp/video_chat2/UMT/umt_l16_qformer.pth",
+    "mistral_model_path": "/root/autodl-tmp/Mistral-7B-Instruct-0.2",
+    "videochat2_model_path": "/root/autodl-tmp/video_chat2/ckpt/stage3/videochat2_mistral_7b_stage3.pth",
+    "freeze_vit": false,
+    "freeze_qformer": false,
+    "max_txt_len": 512,
+    "low_resource": false,
+    "vision_encoder": {
+      "name": "vit_l14",
+      "img_size": 224,
+      "patch_size": 16,
+      "d_model": 1024,
+      "encoder_embed_dim": 1024,
+      "encoder_depth": 24,
+      "encoder_num_heads": 16,
+      "drop_path_rate": 0.0,
+      "num_frames": 20,
+      "tubelet_size": 1,
+      "use_checkpoint": true,
+      "checkpoint_num": 18,
+      "pretrained": "",
+      "return_index": -2,
+      "vit_add_ln": true,
+      "ckpt_num_frame": 4
+    },
+    "num_query_token": 32,
+    "qformer_hidden_dropout_prob": 0.1,
+    "qformer_attention_probs_dropout_prob": 0.1,
+    "qformer_drop_path_rate": 0.2,
+    "extra_num_query_token": 64,
+    "qformer_text_input": true,
+    "system": "",
+    "start_token": "<Video>",
+    "end_token": "</Video>",
+    "add_second_msg": true,
+    "img_start_token": "<Image>",
+    "img_end_token": "</Image>",
+    "random_shuffle": true,
+    "use_flash_attention": true,
+    "use_lora": true,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.1
+  },
+  "optimizer": {
+    "opt": "adamW",
+    "lr": 2e-05,
+    "opt_betas": [
+      0.9,
+      0.999
+    ],
+    "weight_decay": 0.02,
+    "max_grad_norm": -1,
+    "different_lr": {
+      "enable": false,
+      "module_names": [],
+      "lr": 0.001
+    }
+  },
+  "scheduler": {
+    "sched": "cosine",
+    "epochs": 3,
+    "min_lr_multi": 0.25,
+    "warmup_epochs": 0.6
+  },
+  "evaluate": false,
+  "deep_fusion": false,
+  "evaluation": {
+    "eval_frame_ensemble": "concat",
+    "eval_x_only": false,
+    "k_test": 128,
+    "eval_offload": true
+  },
+  "fp16": true,
+  "gradient_checkpointing": true,
+  "wandb": {
+    "enable": false,
+    "entity": "likunchang",
+    "project": "videochat2"
+  },
+  "dist_url": "env://",
+  "device": "cuda:0",
+  "mode": "it_mistral",
+  "output_dir": "scripts/videochat_mistral/",
+  "resume": false,
+  "debug": false,
+  "log_freq": 10,
+  "seed": 42,
+  "save_latest": true,
+  "auto_resume": true,
+  "pretrained_path": "",
+  "rank": 0,
+  "world_size": 1,
+  "gpu": 0,
+  "distributed": true,
+  "dist_backend": "nccl"
+}
